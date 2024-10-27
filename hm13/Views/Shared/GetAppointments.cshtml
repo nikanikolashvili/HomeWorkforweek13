@@ -1,0 +1,63 @@
+﻿namespace hm13.Views.Shared
+{
+@model List<Appointment>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Appointments</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Booked Appointments</h1>
+        
+        
+        <form asp-action="BookAppointment" method="post" class="mb-4">
+            <div class="form-group">
+                <label for="FirstName">First Name</label>
+                <input type="text" class="form-control" id="FirstName" name="FirstName" required />
+            </div>
+            <div class="form-group">
+                <label for="LastName">Last Name</label>
+                <input type="text" class="form-control" id="LastName" name="LastName" required />
+            </div>
+            <div class="form-group">
+                <label for="Doctor">Doctor</label>
+                <input type="text" class="form-control" id="Doctor" name="Doctor" required />
+            </div>
+            <div class="form-group">
+                <label for="Time">Time (HH:mm)</label>
+                <input type="text" class="form-control" id="Time" name="Time" required placeholder="e.g., 15:00" />
+            </div>
+            <button type="submit" class="btn btn-primary">Book Appointment</button>
+        </form>
+
+        @if (Model != null && Model.Any())
+        {
+            <ul class="list-group">
+                @foreach (var appointment in Model)
+                {
+                    <li class="list-group-item">
+                        <strong>@appointment.FirstName @appointment.LastName</strong> - 
+                        <em>@appointment.Doctor</em> at <span class="badge badge-secondary">@appointment.Time</span>
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>No appointments booked yet.</p>
+        }
+    </div>
+
+    
+</body>
+</html>
+
